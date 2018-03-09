@@ -12,42 +12,49 @@ public class hashMap {
 
 	public static void main(String[] args) {
 
-		List<HashMap> couponList = new ArrayList<>();
+		List<HashMap> itemList = new ArrayList<>();
 
-		Map<String, String> coupons = new HashMap<>();
+		Map<String, Object> hashmapList = new HashMap<>();
 
-		coupons.put("Description", "Shampoo");
-		coupons.put("Discount", ".50");
-		coupons.put("Manufacture", "PG");
-		couponList.add((HashMap) coupons);
+		// sort by percentage paid off
 
-		Map<String, String> couponsTwo = new HashMap<>();
+		hashmapList.put("name", "Vador");
+		hashmapList.put("loan", 10000.00);
+		hashmapList.put("make", "Infiniti");
+		hashmapList.put("paidoff", 5893.12);
+		itemList.add((HashMap) hashmapList);
 
-		couponsTwo.put("Description", "Meat");
-		couponsTwo.put("Discount", ".25");
-		couponsTwo.put("Manufacture", "Hormel");
-		couponList.add((HashMap) couponsTwo);
+		Map<String, Object> hashmap2List = new HashMap<>();
 
-		Map<String, String> couponsThree = new HashMap<>();
+		hashmap2List.put("name", "Dennis");
+		hashmap2List.put("loan", 12000.00);
+		hashmap2List.put("make", "Chysler");
+		hashmapList.put("paidoff", 4289.22);
+		itemList.add((HashMap) hashmap2List);
 
-		couponsThree.put("Description", "Begal");
-		couponsThree.put("Discount", ".35");
-		couponsThree.put("Manufacture", "Thomas");
-		couponList.add((HashMap) couponsThree);
+		Map<String, Object> hashmap3List = new HashMap<>();
 
-		Map<String, String> couponsFour = new HashMap<>();
+		hashmap3List.put("name", "Sidney");
+		hashmap3List.put("loan", 5000.00);
+		hashmap3List.put("make", "Buick");
+		hashmapList.put("paidoff", 1232.990); 
+		itemList.add((HashMap) hashmap3List);
 
-		couponsFour.put("Description", "Spinach");
-		couponsFour.put("Discount", ".15");
-		couponsFour.put("Manufacture", "Select");
-		couponList.add((HashMap) couponsFour);
+		Map<String, Object> hashmap4List = new HashMap<>();
 
-		Map<String, String> couponsFive = new HashMap<>();
+		hashmap4List.put("name", "Myles");
+		hashmap4List.put("loan", 32500.00);
+		hashmap4List.put("make", "Chevy");
+		hashmapList.put("paidoff", 3100.45);
+		itemList.add((HashMap) hashmap4List);
 
-		couponsFive.put("Description", "Crackers");
-		couponsFive.put("Discount", ".45");
-		couponsFive.put("Manufacture", "Nature Made");
-		couponList.add((HashMap) couponsFive);
+		Map<String, Object> hashmap5List = new HashMap<>();
+
+		hashmap5List.put("name", "Angus");
+		hashmap5List.put("loan", 45990.00);
+		hashmap5List.put("make", "Lexus");
+		hashmapList.put("paidoff", 12978.12);
+		itemList.add((HashMap) hashmap5List);
 
 		System.out.println(couponList);
 		int a;
