@@ -56,12 +56,12 @@ public class hashMap {
 		hashmapList.put("paidoff", 12978.12);
 		itemList.add((HashMap) hashmap5List);
 
-		System.out.println(couponList);
+		System.out.println(itemList);
 		int a;
 		// System.out.println("before sort");
 		List<List<String>> listOfList = new ArrayList<List<String>>();
-		for (int i = 0; i < couponList.size(); i++) {
-			HashMap<String, String> tmpData = (HashMap<String, String>) couponList.get(i);
+		for (int i = 0; i < itemList.size(); i++) {
+			HashMap<String, String> tmpData = (HashMap<String, String>) itemList.get(i);
 			Set<String> key = tmpData.keySet();
 			Iterator it = key.iterator();
 			// System.out.println("");
@@ -79,7 +79,7 @@ public class hashMap {
 
 
 
-		List<HashMap> couponNewList = new ArrayList<>();
+		List<HashMap> newList = new ArrayList<>();
 
 		Map<String, String> couponsNew = new HashMap<>();
 
@@ -89,18 +89,18 @@ public class hashMap {
 			System.out.println(tmp);
 			System.out.println(tmp.get(0));
 
-			if (couponNewList.size() < 4) {
+			if (newList.size() < 4) {
 				Map<String, String> tmpCoupon = new HashMap<>();
 
 				tmpCoupon.put("Description", tmp.get(0));
 				tmpCoupon.put("Discount", tmp.get(1));
 				tmpCoupon.put("Manufacture", tmp.get(2));
-				couponNewList.add((HashMap) tmpCoupon);
+				newList.add((HashMap) tmpCoupon);
 				System.out.println(tmpCoupon);
 			}
 		}
 		System.out.println("new list");
-		System.out.println(couponNewList);
+		System.out.println(newList);
 
 	}
 	
