@@ -2,8 +2,6 @@ package hashMapping;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -11,9 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class hashMap {
+public class holdHashMap {
 
-	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 
 		List<HashMap> itemList = new ArrayList<>();
@@ -35,13 +32,13 @@ public class hashMap {
 		hashmap2List.put("make", "Chysler");
 		hashmap2List.put("paidoff", "4289.22");
 		itemList.add((HashMap) hashmap2List);
-
+		
 		Map<String, Object> hashmap3List = new HashMap<>();
 
 		hashmap3List.put("name", "Sidney");
 		hashmap3List.put("loan", "5000.00");
 		hashmap3List.put("make", "Buick");
-		hashmap3List.put("paidoff", "1232.99");
+		hashmap3List.put("paidoff", "1232.99"); 
 		itemList.add((HashMap) hashmap3List);
 
 		Map<String, Object> hashmap4List = new HashMap<>();
@@ -59,86 +56,75 @@ public class hashMap {
 		hashmap5List.put("make", "Lexus");
 		hashmap5List.put("paidoff", "12978.12");
 		itemList.add((HashMap) hashmap5List);
-
+		
 		System.out.println("");
-		for (int i = 0; i < itemList.size(); i++) {
+		for (int i=0;i<itemList.size();i++) {
 			System.out.println(itemList.get(i));
 		}
-
-		System.out.println("");
-		// calculate percentage remaining
-		List<HashMap> listOfList = new ArrayList<>();
+		
+	// calculate percentage remaining
+		// System.out.println("before sort");
+		List<List<String>> listOfList = new ArrayList<List<String>>();
 		DecimalFormat df = new DecimalFormat("0.00");
 		df.setMaximumFractionDigits(2);
-		
-		for (int j = 0; j < itemList.size(); j++) {
-			Map<String, Object> tmpData =  itemList.get(j);
+		for (int i = 0; i < itemList.size(); i++) {
+			HashMap<String, String> tmpData = (HashMap<String, String>) itemList.get(i);
 			Set<String> key = tmpData.keySet();
-			Iterator<String> it = key.iterator();
-			Map<String, Object> tmpList = new HashMap<>();
+			Iterator it = key.iterator();
+			// System.out.println("");
+			// System.out.println("new hashmap");
+			List<String> tmpList = new ArrayList();
 			double loan = 0.0;
 			double paidoff = 0.0;
 			while (it.hasNext()) {
 				String hmKey = (String) it.next();
 				String hmData = (String) tmpData.get(hmKey);
-				
 				if (hmKey == "loan") {
 					loan = Double.parseDouble(hmData);
-					tmpList.put(hmKey,  loan);
-				} else {
-					if (hmKey == "paidoff") {
-						paidoff = Double.parseDouble(hmData);
-					}
-					else {
-						tmpList.put(hmKey, hmData);
-					}
-
 				}
+				if (hmKey == "paidoff") {
+					paidoff = Double.parseDouble(hmData);
+				}
+				tmpList.add(hmData);
+				// System.out.println("Key " + hmKey + " Data " + hmData);
 			}
+		//	System.out.println("loan " + df.format(loan));
+		//	System.out.println("paidoff " + paidoff);
 			double percentLeft = ((loan - paidoff) * 100) / loan;
-			String pl = df.format(percentLeft);
-			double plD = Double.parseDouble(pl);
-			tmpList.put("percent", plD);
-			listOfList.add((HashMap) tmpList);
+		//	System.out.println(df.format(percentLeft));
+			String pL = df.format(percentLeft);
+			tmpList.add(pL);
+			System.out.println(tmpList);
+			listOfList.add(tmpList);
+		//	System.out.println(listOfList);
 		}
 
-		System.out.println(listOfList);
-		
-		System.out.println("");
-		for (int i = 0; i < listOfList.size(); i++) {
-			System.out.println(listOfList.get(i));
-		}
-		
-		/*
-		*	{loan=10000.0, name=Vador, make=Infiniti, percent=41.07}
-		*	{loan=12000.0, name=Dennis, make=Chysler, percent=64.26}
-		*	{loan=5000.0, name=Sidney, make=Buick, percent=75.34}
-		*	{loan=32500.0, name=Myles, make=Chevy, percent=90.46}
-		*	{loan=45990.0, name=Angus, make=Lexus, percent=71.78}
-		 */
-		
-		listOfList.sort(Comparator.comparing(m -> (double)m.get("percent")));
-		
-		System.out.println("");
-		for (int i = 0; i < listOfList.size(); i++) {
-			System.out.println(listOfList.get(i));
-			
-		}
-		
-		/*
-		 *	{loan=10000.0, name=Vador, make=Infiniti, percent=41.07}
-		*	{loan=12000.0, name=Dennis, make=Chysler, percent=64.26}
-		*	{loan=45990.0, name=Angus, make=Lexus, percent=71.78}
-		*	{loan=5000.0, name=Sidney, make=Buick, percent=75.34}
-		*	{loan=32500.0, name=Myles, make=Chevy, percent=90.46}
-		 */
 
-		listOfList.sort(Comparator.comparing(m -> (double)m.get("percent")));
-		
-		System.out.println("");
+
+		List<HashMap> newList = new ArrayList<>();
+
 		for (int i = 0; i < listOfList.size(); i++) {
-			System.out.println(listOfList.get(i));
-	}
+			List<String> tmp = listOfList.get(i);
+
+	//		System.out.println("tmp " + tmp);
+	//		System.out.println("tmp.get(0) " + tmp.get(0));
+
+				Map<String, Object> tmpItem = new HashMap<>();
+
+				tmpItem.put("name", tmp.get(2));
+				tmpItem.put("Make", tmp.get(3));
+				tmpItem.put("loan", tmp.get(0));
+				tmpItem.put("paidoff", tmp.get(1));
+				tmpItem.put("percent", tmp.get(4));
+				newList.add((HashMap) tmpItem);
+			//	System.out.println(tmpItem);
+		}
+		System.out.println("new list");
+		System.out.println(newList);
+
+		// sort by percentage
+		newList.sort(Comparator.comparing(m -> (double)m.get("percent")));
+
 	}
 
 }
