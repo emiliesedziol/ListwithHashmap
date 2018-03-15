@@ -64,15 +64,23 @@ public class hashMap {
 		for (int i = 0; i < itemList.size(); i++) {
 			System.out.println(itemList.get(i));
 		}
+		/*
+		 * unsorted and before percentage paid off
+		 * {loan=10000.00, paidoff=5893.12, name=Vador, make=Infiniti}
+		 * {loan=12000.00, paidoff=4289.22, name=Dennis, make=Chysler}
+		 * {loan=5000.00, paidoff=1232.99, name=Sidney, make=Buick}
+		 * {loan=32500.00, paidoff=3100.45, name=Myles, make=Chevy}
+		 * {loan=45990.00, paidoff=12978.12, name=Angus, make=Lexus}
+		 */
 
 		System.out.println("");
 		// calculate percentage remaining
 		List<HashMap> listOfList = new ArrayList<>();
 		DecimalFormat df = new DecimalFormat("0.00");
 		df.setMaximumFractionDigits(2);
-		
+
 		for (int j = 0; j < itemList.size(); j++) {
-			Map<String, Object> tmpData =  itemList.get(j);
+			Map<String, Object> tmpData = itemList.get(j);
 			Set<String> key = tmpData.keySet();
 			Iterator<String> it = key.iterator();
 			Map<String, Object> tmpList = new HashMap<>();
@@ -81,21 +89,21 @@ public class hashMap {
 			while (it.hasNext()) {
 				String hmKey = (String) it.next();
 				String hmData = (String) tmpData.get(hmKey);
-				
+
 				if (hmKey == "loan") {
 					loan = Double.parseDouble(hmData);
-					tmpList.put(hmKey,  loan);
+					tmpList.put(hmKey, loan);
 				} else {
 					if (hmKey == "paidoff") {
 						paidoff = Double.parseDouble(hmData);
-					}
-					else {
+						tmpList.put(hmKey, paidoff);
+					} else {
 						tmpList.put(hmKey, hmData);
 					}
 
 				}
 			}
-			double percentLeft = ((loan - paidoff) * 100) / loan;
+			double percentLeft = (((loan - paidoff) * 100) / loan) * -1;
 			String pl = df.format(percentLeft);
 			double plD = Double.parseDouble(pl);
 			tmpList.put("percent", plD);
@@ -103,42 +111,45 @@ public class hashMap {
 		}
 
 		System.out.println(listOfList);
-		
+
 		System.out.println("");
 		for (int i = 0; i < listOfList.size(); i++) {
 			System.out.println(listOfList.get(i));
 		}
-		
+
 		/*
-		*	{loan=10000.0, name=Vador, make=Infiniti, percent=41.07}
-		*	{loan=12000.0, name=Dennis, make=Chysler, percent=64.26}
-		*	{loan=5000.0, name=Sidney, make=Buick, percent=75.34}
-		*	{loan=32500.0, name=Myles, make=Chevy, percent=90.46}
-		*	{loan=45990.0, name=Angus, make=Lexus, percent=71.78}
-		 */
-		
-		listOfList.sort(Comparator.comparing(m -> (double)m.get("percent")));
-		
-		System.out.println("");
-		for (int i = 0; i < listOfList.size(); i++) {
-			System.out.println(listOfList.get(i));
-			
-		}
-		
-		/*
-		 *	{loan=10000.0, name=Vador, make=Infiniti, percent=41.07}
-		*	{loan=12000.0, name=Dennis, make=Chysler, percent=64.26}
-		*	{loan=45990.0, name=Angus, make=Lexus, percent=71.78}
-		*	{loan=5000.0, name=Sidney, make=Buick, percent=75.34}
-		*	{loan=32500.0, name=Myles, make=Chevy, percent=90.46}
+		 * unsorted
+		 * {loan=10000.0, paidoff=5893.12, name=Vador, make=Infiniti, percent=-41.07}
+		 * {loan=12000.0, paidoff=4289.22, name=Dennis, make=Chysler, percent=-64.26}
+		 * {loan=5000.0, paidoff=1232.99, name=Sidney, make=Buick, percent=-75.34}
+		 * {loan=32500.0, paidoff=3100.45, name=Myles, make=Chevy, percent=-90.46}
+		 * {loan=45990.0, paidoff=12978.12, name=Angus, make=Lexus, percent=-71.78}
 		 */
 
-		listOfList.sort(Comparator.comparing(m -> (double)m.get("percent")));
-		
+		listOfList.sort(Comparator.comparing(m -> (double) m.get("percent")));
+
 		System.out.println("");
 		for (int i = 0; i < listOfList.size(); i++) {
 			System.out.println(listOfList.get(i));
-	}
+
+		}
+
+		/*
+ 	 	 * Leaving loan as a positive will sort least paid off to most paid off
+		 * Changing loan to be a negative changed the sort order
+		 * {loan=32500.0, paidoff=3100.45, name=Myles, make=Chevy, percent=-90.46}
+		 * {loan=5000.0, paidoff=1232.99, name=Sidney, make=Buick, percent=-75.34}
+		 * {loan=45990.0, paidoff=12978.12, name=Angus, make=Lexus, percent=-71.78}
+		 * {loan=12000.0, paidoff=4289.22, name=Dennis, make=Chysler, percent=-64.26}
+		 * {loan=10000.0, paidoff=5893.12, name=Vador, make=Infiniti, percent=-41.07}
+		 */
+
+		listOfList.sort(Comparator.comparing(m -> (double) m.get("percent")));
+
+		System.out.println("");
+		for (int i = 0; i < listOfList.size(); i++) {
+			System.out.println(listOfList.get(i));
+		}
 	}
 
 }
